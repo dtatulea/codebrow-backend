@@ -101,7 +101,7 @@ class handle:
 	def GET(self, project_name, path="/"):
 		ret = dispatch(project_name, path)
 		if ret:
-			return json.dups(ret)
+			return json.dumps(ret.data())
 		else:
 			return None
 
@@ -115,4 +115,4 @@ if __name__ == "__main__":
 	print "-------------------------------------------------"
 	print json.dumps(dispatch("linux-kernel", "drivers/net/x.c").data())
 
-	#print file_dump("linux-kernel", "README").json()
+	#print _file("linux-kernel", "README").json()

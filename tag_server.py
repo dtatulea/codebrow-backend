@@ -7,8 +7,8 @@ import fm
 urls = (
 	'/p/', 'projects.handle_list',
 	'/p/info/(.+)', 'projects.handle',
-	'/fm/([\-\w]+)/?', 'fm.handle_root',
-	'/fm/([\-\w]+)/([\-\w]+)', 'fm.handle',
+	'/fm/([\-\w]+)/?', 'fm.handle',
+	'/fm/([\-\w]+)/([\-\w/\.]+)', 'fm.handle',
 )
 
 app = web.application(urls, globals())
