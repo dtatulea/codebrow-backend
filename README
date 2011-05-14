@@ -1,0 +1,7 @@
+== codebrow backend ==
+
+Simple backend server that listens for HTTP requests and responds with jsons.
+For now just a mockup, in the future we'll see.
+
+== Important ==
+* don't forget to symlink webpy
