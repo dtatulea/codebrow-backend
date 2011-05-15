@@ -37,7 +37,10 @@ class config:
 		return self.cfg_json_buf
 
 prj_list = loader()
-# TODO: webpy goes through this twice. why? fixme by doing some kind of singleton...
+
+# get the project name
+def get(name):
+	return prj_list[name]
 
 class handle_list:
 	def GET(self):

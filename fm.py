@@ -77,7 +77,7 @@ class file_dump(listing):
 
 def dispatch(project_name, path):
 		try:
-			project = projects.prj_list[project_name]
+			project = projects.get(project_name)
 		except KeyError:
 			print "No such project: " + project_name
 			return
