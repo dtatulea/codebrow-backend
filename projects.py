@@ -2,13 +2,13 @@ import os
 import glob
 import json
 
-class loader:
+class Loader:
 	def __init__(self):
-		self.cfg_path = "./config/" # XXX: config option
+		self.cfg_path = "./projects/" # XXX: config option
 		self.prj_list = {}
 
 		for cfg in glob.glob(self.cfg_path + "*.json"):
-			p = config(cfg)
+			p = Config(cfg)
 			self.prj_list[p["name"]] = p
 	
 	# act as an array iterator
@@ -20,7 +20,7 @@ class loader:
 	def __getitem__(self, key):
 		return self.prj_list[key]
 
-class config:
+class Config:
 	cfg_json_buf = ""
 
 	def __init__(self, cfg_file):
@@ -36,13 +36,13 @@ class config:
 	def json(self):
 		return self.cfg_json_buf
 
-prj_list = loader()
+prj_list = Loader()
 
 # get the project name
 def get(name):
 	return prj_list[name]
 
-class handle_list:
+class UrlHandlerList:
 	def GET(self):
 		ret = ""
 		for p in prj_list:
@@ -50,7 +50,7 @@ class handle_list:
 			print p
 		return ret
 
-class handle:
+class UrlHandler:
 	def GET(self, name):
 		try:
 			p = prj_list[name]
@@ -61,7 +61,7 @@ class handle:
 
 
 if __name__ == "__main__":
-	d = loader()
+	d = Loader()
 	for p in d:
 		print p.json()
 

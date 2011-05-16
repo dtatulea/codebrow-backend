@@ -5,10 +5,10 @@ import projects
 import fm
 
 urls = (
-	'/p/', 'projects.handle_list',
-	'/p/info/(.+)', 'projects.handle',
-	'/fm/([\-\w]+)/?', 'fm.handle',
-	'/fm/([\-\w]+)/([\-\w/\.]+)', 'fm.handle',
+	'/p/', 'projects.UrlHandlerList',
+	'/p/info/(.+)', 'projects.UrlHandler',
+	'/fm/([\-\w]+)/?', 'fm.UrlHandler',
+	'/fm/([\-\w]+)/([\-\w/\.]+)', 'fm.UrlHandler',
 )
 
 app = web.application(urls, globals())

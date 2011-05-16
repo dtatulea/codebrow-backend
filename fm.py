@@ -11,7 +11,7 @@ import json
 # locals
 import projects
 
-class listing:
+class Listing:
 	def __init__(self, project, path, abs_path=None):
 		if abs_path == None:
 	 		self.abs_path = project["src_path"] + path
@@ -27,10 +27,10 @@ class listing:
 			"rootdirectories" : self.path
 			}
 
-class directories(listing):
+class Directories(Listing):
 
 	def __init__(self, project, path, abs_path=None):
-		listing.__init__(self, project, path, abs_path)
+		Listing.__init__(self, project, path, abs_path)
 
 		self.dirs = []
 		self.files = []
@@ -56,13 +56,13 @@ class directories(listing):
 				}
 			}
 
-		ret.update(listing.data(self))
+		ret.update(Listing.data(self))
 		return ret
 
-class file_dump(listing):
+class FileDump(Listing):
 
 	def __init__(self, project, path, abs_path=None):
-		listing.__init__(self, project, path, abs_path)
+		Listing.__init__(self, project, path, abs_path)
 
 	def data(self):
 		ret = {
@@ -71,7 +71,7 @@ class file_dump(listing):
 				"content" : open(self.abs_path, "r").read()
 				}
 			}
-		ret.update(listing.data(self))
+		ret.update(Listing.data(self))
 
 		return ret
 
@@ -89,14 +89,14 @@ def dispatch(project_name, path):
 		
 
 		if os.path.isdir(abs_path):
-			return directories(project, path, abs_path)
+			return Directories(project, path, abs_path)
 		elif os.path.isfile(abs_path):
-			return file_dump(project, path, abs_path)
+			return FileDump(project, path, abs_path)
 		else:
 			return None
 
 
-class handle:
+class UrlHandler:
 
 	def GET(self, project_name, path="/"):
 		ret = dispatch(project_name, path)
